@@ -1,0 +1,62 @@
+<html>
+
+<body>
+    <label>Decimal: </label>
+    <input type="number" placeholder="Desimal" id="dec" />
+    <label>Biner: </label>
+    <input type="text" placeholder="Biner" id="bin" />
+    <label>Hexa: </label>
+    <input type="text" placeholder="Hexadesimal" id="hex" />
+    <label>Octal: </label>
+    <input type="text" placeholder="Octal" id="oct" />
+    <script>
+        const decimal = document.getElementById("dec")
+        const biner = document.getElementById("bin")
+        const hexa = document.getElementById("hex")
+        const octal = document.getElementById("oct")
+
+        const fromBaseToBase = (num, from, to) => {
+            const value = parseInt(num, from)
+            return value.toString(to)
+        }
+
+        const clearAll = () => {
+            [decimal, biner, hexa, octal].forEach(item => {
+                item.value = ""
+            })
+        }
+
+        const handleChange = (e, from) => {
+            const val = e.target.value
+            if (!val) return clearAll()
+            decimal.value = fromBaseToBase(val, from, 10)
+            biner.value = fromBaseToBase(val, from, 2)
+            hexa.value = fromBaseToBase(val, from, 16)
+            octal.value = fromBaseToBase(val, from, 8)
+
+        }
+
+        decimal.oninput = e => handleChange(e, 10)
+        biner.oninput = e => handleChange(e, 2)
+        hexa.oninput = e => handleChange(e, 16)
+        octal.oninput = e => handleChange(e, 8)
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        body > input {
+            width: 300px;
+        }
+        
+        body > label {
+            align-self: left;
+            margin: 0px;
+        }
+    </style>
+</body>
+
+</html>
